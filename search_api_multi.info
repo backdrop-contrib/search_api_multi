@@ -6,3 +6,10 @@ dependencies[] = search_api
 core = 7.x
 package = Search
 
+files[] = search_api_multi.module
+files[] = search_api_multi.query.inc
+files[] = search_api_multi.service.inc
+files[] = views/handler_argument_fulltext.inc
+files[] = views/handler_filter_fulltext.inc
+files[] = views/query.inc
+files[] = views/search_api_multi.views.inc
