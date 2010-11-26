@@ -87,16 +87,16 @@ function search_api_multi_views_data() {
             }
 
             // If field is indexed, also add additional handlers.
-            if (!empty($fields[$key]['indexed'])) {
+            if (!empty($fields[$prefix . $property]['indexed'])) {
               // Discern between original and indexed type
               $table[$key]['field']['type'] = $table[$key]['type'];
-              $table[$key]['type'] = $fields[$key]['type'];
-              $table[$key] += _search_api_views_add_handlers($fields[$key], $value);
+              $table[$key]['type'] = $fields[$prefix . $property]['type'];
+              $table[$key] += _search_api_views_add_handlers($fields[$prefix . $property], $value);
               if (!empty($table[$key]['sort'])) {
                 $table[$key]['field']['click sortable'] = TRUE;
               }
             }
-            unset($fields[$key]);
+            unset($fields[$prefix . $property]);
           }
           elseif ($depth < $max_depth) {
             // Visit this entity/struct in a later iteration.
@@ -135,6 +135,7 @@ function search_api_multi_views_data() {
           }
         }
       }
+      $key = $index->machine_name . ':' . $key;
       if ($group) {
         $table[$key]['group'] = $group;
       }
