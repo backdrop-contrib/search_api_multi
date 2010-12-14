@@ -14,20 +14,26 @@ function search_api_multi_views_api() {
 }
 
 /**
- * Implements hook_search_api_index_insert().
+ * Implements hook_search_api_server_enabled().
  */
-function search_api_multi_search_api_server_insert(SearchApiServer $server) {
-  if (module_exists('search_api_views') && $server->supportsFeature('search_api_multi')) {
-    // Make the new server available for views.
-    views_invalidate_cache();
+function search_api_multi_search_api_server_enabled(array $servers) {
+  if (!module_exists('search_api_views')) {
+    return;
+  }
+  foreach ($servers as $server) {
+    if ($server->supportsFeature('search_api_multi')) {
+      // Make the new server(s) available for views.
+      views_invalidate_cache();
+      break;
+    }
   }
 }
 
 /**
  * Implements hook_search_api_server_update().
  */
-function search_api_multi_search_api_server_update(SearchApiServer $server, $op = 'edit') {
-  if (module_exists('search_api_views') && $server->supportsFeature('search_api_multi') && $op == 'disabled') {
+function search_api_multi_search_api_server_update(SearchApiServer $server) {
+  if (module_exists('search_api_views') && $server->supportsFeature('search_api_multi') && !$server->enabled && $server->original->enabled) {
     _search_api_multi_server_unavailable($server);
   }
 }
