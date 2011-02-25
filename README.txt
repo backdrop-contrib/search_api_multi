@@ -1,4 +1,3 @@
-$Id$
 
 Multi-index searches
 --------------------

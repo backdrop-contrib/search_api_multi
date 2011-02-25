@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * Interface representing a search query on multiple Search API indexes on the

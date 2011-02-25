@@ -1,5 +1,4 @@
 <?php
-// $Id$
 
 /**
  * Interface defining the additional methods a service has to implement in order

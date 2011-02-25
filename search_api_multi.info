@@ -1,4 +1,3 @@
-; $Id$
 
 name = Multi-index searches
 description = Small extension for the Search API that allows searches across several indexes on the same server.
