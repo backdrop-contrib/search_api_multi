@@ -12,7 +12,9 @@ class SearchApiMultiHandlerArgumentFulltext extends SearchApiViewsHandlerArgumen
     parent::options_form($form, $form_state);
 
     $fields = array();
-    foreach ($this->query->getIndexes() as $index) {
+    $server_id = substr($this->table, 18);
+    $indexes = search_api_index_load_multiple(FALSE, array('enabled' => TRUE, 'server' => $server_id));
+    foreach ($indexes as $index) {
       if (!empty($index->options['fields'])) {
         $prefix = $index->machine_name . ':';
         $prefix_name = $index->name . ' » ';
