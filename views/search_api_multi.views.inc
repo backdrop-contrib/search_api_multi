@@ -20,7 +20,6 @@ function search_api_multi_views_data() {
     // Base data
     $key = 'search_api_server_' . $server->machine_name;
     $table = &$data[$key];
-    $entity_info = entity_get_info($index->entity_type);
     $table['table']['base'] = array(
       'field' => 'search_api_id',
       'index' => $server->machine_name,
@@ -32,7 +31,7 @@ function search_api_multi_views_data() {
     // Add all available fields
     // This is largely copied from _search_api_admin_get_fields().
     $max_depth = variable_get('search_api_multi_max_fields_depth', 2);
-    $orig_wrapper = $index->entityWrapper();
+    $orig_wrapper = $index->entityWrapper(NULL, FALSE);
     $fields = empty($index->options['fields']) ? array() : $index->options['fields'];
 
     // A wrapper for a specific field name prefix, e.g. 'user:' mapped to the user wrapper
@@ -48,7 +47,7 @@ function search_api_multi_views_data() {
       foreach ($wrappers as $prefix => $wrapper) {
         $prefix_name = $prefix_names[$prefix];
         $depth = substr_count($prefix, ':');
-        // Deal with lists of entities.
+        // Deal with lists.
         $nesting_level = $nesting_levels[$prefix];
         $type_prefix = str_repeat('list<', $nesting_level);
         $type_suffix = str_repeat('>', $nesting_level);
