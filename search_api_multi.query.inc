@@ -544,7 +544,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
       if (!isset($this->indexes[$index_id])) {
         throw new SearchApiException(t("Trying to search on fields of index !index which doesn't lie on server !server.", array('!index' => $index_id, '!server' => $this->server->name)));
       }
-      if (empty($this->indexes[$index_id]->options['fields'][$field]['indexed']) || !search_api_is_text_type($this->indexes[$index_id]->options['fields'][$field]['type'])) {
+      if (empty($this->indexes[$index_id]->options['fields'][$field]) || !search_api_is_text_type($this->indexes[$index_id]->options['fields'][$field]['type'])) {
         throw new SearchApiException(t('Trying to search on field !field which is no indexed fulltext field.', array('!field' => $field)));
       }
     }

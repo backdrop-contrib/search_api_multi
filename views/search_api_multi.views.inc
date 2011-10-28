@@ -85,7 +85,7 @@ function search_api_multi_views_data() {
             }
 
             // If field is indexed, also add additional handlers.
-            if (!empty($fields[$prefix . $property]['indexed'])) {
+            if (!empty($fields[$prefix . $property])) {
               // Discern between original and indexed type
               $table[$key]['field']['type'] = $table[$key]['type'];
               $table[$key]['type'] = $fields[$prefix . $property]['type'];
@@ -110,9 +110,6 @@ function search_api_multi_views_data() {
 
     // Add handlers for all indexed fields which weren't processed yet.
     foreach ($fields as $key => $field) {
-      if (empty($field['indexed'])) {
-        continue;
-      }
       $tmp = $orig_wrapper;
       $group = '';
       $name = $index->name;
