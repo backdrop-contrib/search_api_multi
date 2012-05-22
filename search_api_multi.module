@@ -97,10 +97,10 @@ function _search_api_multi_server_unavailable(SearchApiServer $server) {
 function search_api_multi_query($id, array $options = array()) {
   $server = search_api_server_load($id);
   if (!$server) {
-    throw new SearchApiException(t('Unknown server with ID !id.', array('!id' => $id)));
+    throw new SearchApiException(t('Unknown server with ID @id.', array('@id' => $id)));
   }
   if (!$server->supportsFeature('search_api_multi')) {
-    throw new SearchApiException(t("The search server !name doesn't support multi-index searches.", array('!name' => $server->name)));
+    throw new SearchApiException(t("The search server @name doesn't support multi-index searches.", array('@name' => $server->name)));
   }
   return $server->queryMultiple($options);
 }

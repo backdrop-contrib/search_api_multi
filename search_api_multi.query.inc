@@ -379,12 +379,12 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
    */
   public function __construct(SearchApiServer $server, array $options = array()) {
     if (!$server->supportsFeature('search_api_multi')) {
-      throw new SearchApiException(t("The search server !name doesn't support multi-index searches.", array('!name' => $server->name)));
+      throw new SearchApiException(t("The search server @name doesn't support multi-index searches.", array('@name' => $server->name)));
     }
     $this->server = $server;
     $this->indexes = search_api_index_load_multiple(FALSE, array('server' => $server->machine_name, 'enabled' => 1));
     if (empty($this->indexes)) {
-      throw new SearchApiException(t('There are no enabled indexes on the searched server !name.', array('!name' => $server->name)));
+      throw new SearchApiException(t('There are no enabled indexes on the searched server @name.', array('@name' => $server->name)));
     }
     foreach ($this->indexes as $index) {
       if (empty($index->options['fields'])) {
@@ -393,7 +393,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
       if (isset($options['parse mode'])) {
         $modes = $this->parseModes();
         if (!isset($modes[$options['parse mode']])) {
-          throw new SearchApiException(t('Unknown parse mode: !mode.', array('!mode' => $options['parse mode'])));
+          throw new SearchApiException(t('Unknown parse mode: @mode.', array('@mode' => $options['parse mode'])));
         }
       }
     }
@@ -542,10 +542,10 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     foreach ($fields as $spec) {
       list($index_id, $field) = explode(':', $spec, 2);
       if (!isset($this->indexes[$index_id])) {
-        throw new SearchApiException(t("Trying to search on fields of index !index which doesn't lie on server !server.", array('!index' => $index_id, '!server' => $this->server->name)));
+        throw new SearchApiException(t("Trying to search on fields of index @index which doesn't lie on server @server.", array('@index' => $index_id, '@server' => $this->server->name)));
       }
       if (empty($this->indexes[$index_id]->options['fields'][$field]) || !search_api_is_text_type($this->indexes[$index_id]->options['fields'][$field]['type'])) {
-        throw new SearchApiException(t('Trying to search on field !field which is no indexed fulltext field.', array('!field' => $field)));
+        throw new SearchApiException(t('Trying to search on field @field which is no indexed fulltext field.', array('@field' => $field)));
       }
     }
     $this->fields = $fields;
@@ -611,7 +611,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     if ($field != 'search_api_relevance' && $field != 'search_api_id') {
       list($index_id, $f) = explode(':', $field, 2);
       if (!isset($this->indexes[$index_id])) {
-        throw new SearchApiException(t("Trying to search on fields of index !index which doesn't lie on server !server.", array('!index' => $index_id, '!server' => $this->server->name)));
+        throw new SearchApiException(t("Trying to search on fields of index @index which doesn't lie on server @server.", array('@index' => $index_id, '@server' => $this->server->name)));
       }
       $fields = $this->indexes[$index_id]->options['fields'];
       $fields += array(
@@ -619,12 +619,12 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
         'search_api_id' => array('type' => 'integer'),
       );
       if (empty($fields[$f])) {
-        throw new SearchApiException(t('Trying to sort on unknown field !field.', array('!field' => $f)));
+        throw new SearchApiException(t('Trying to sort on unknown field @field.', array('@field' => $f)));
       }
       $type = $fields[$f]['type'];
       if (search_api_is_list_type($type) || search_api_is_text_type($type)) {
-        throw new SearchApiException(t('Trying to sort on field !field of illegal type !type.', array('!field' => $f, '!type' => $type)));
-    }
+        throw new SearchApiException(t('Trying to sort on field @field of illegal type @type.', array('@field' => $f, '@type' => $type)));
+      }
     }
     $order = strtoupper(trim($order)) == 'DESC' ? 'DESC' : 'ASC';
     $this->sort[$field] = $order;
