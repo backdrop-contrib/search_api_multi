@@ -15,7 +15,7 @@ class SearchApiMultiViewsQuery extends SearchApiViewsQuery {
   /**
    * Create the basic query object and fill with default values.
    */
-  public function init($base_table, $base_field, array $options) {
+  public function init($base_table, $base_field, $options) {
     try {
       parent::init($base_table, $base_field, $options);
       if (substr($base_table, 0, 18) == 'search_api_server_') {
