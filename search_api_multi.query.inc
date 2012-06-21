@@ -111,7 +111,7 @@ interface SearchApiMultiQueryInterface {
    * Add a new ($field $operator $value) condition filter.
    *
    * @param $field
-   *   The field to filter on. Either a field specification as detailled in the
+   *   The field to filter on. Either a field specification as detailed in the
    *   class comment, or the special field "search_api_multi_index" which means
    *   a filter on the searched indexes.
    * @param $value
