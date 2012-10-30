@@ -10,13 +10,13 @@ class SearchApiMultiHandlerFilterFulltext extends SearchApiViewsHandlerFilterFul
    */
   protected function getFulltextFields() {
     $fields = array();
-    $server_id = substr($this->table, 18);
+    $server_id = substr($this->table, 17);
     $indexes = search_api_index_load_multiple(FALSE, array('enabled' => TRUE, 'server' => $server_id));
     foreach ($indexes as $index) {
-      if (!empty($index->options['fields'])) {
+      if ($index->getFields()) {
         $prefix = $index->machine_name . ':';
         $prefix_name = $index->name . ' » ';
-        $f = $index->options['fields'];
+        $f = $index->getFields();
         foreach ($index->getFulltextFields() as $name) {
           $fields[$prefix . $name] = $prefix_name . $f[$name]['name'];
         }

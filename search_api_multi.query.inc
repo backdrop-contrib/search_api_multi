@@ -176,7 +176,7 @@ interface SearchApiMultiQueryInterface {
    *   - 'result count': The overall number of results for this query, without
    *     range restrictions. Might be approximated, for large numbers.
    *   - results: An array of results, ordered as specified. The array keys are
-   *     the items' IDs, values are arrays containing the following keys:
+   *     arbitrary unique keys, values are arrays containing the following keys:
    *     - id: The item's ID.
    *     - index_id: The machine name of the index this item was found on.
    *     - score: A float measuring how well the item fits the search.
@@ -659,7 +659,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
    *   - 'result count': The overall number of results for this query, without
    *     range restrictions. Might be approximated, for large numbers.
    *   - results: An array of results, ordered as specified. The array keys are
-   *     the items' IDs, values are arrays containing the following keys:
+   *     arbitrary unique keys, values are arrays containing the following keys:
    *     - id: The item's ID.
    *     - index_id: The machine name of the index this item was found on.
    *     - score: A float measuring how well the item fits the search.
