@@ -15,7 +15,7 @@ class SearchApiMultiHandlerArgumentFulltext extends SearchApiViewsHandlerArgumen
     $server_id = substr($this->table, 17);
     $indexes = search_api_index_load_multiple(FALSE, array('enabled' => TRUE, 'server' => $server_id));
     foreach ($indexes as $index) {
-      if (!empty($index->getFields())) {
+      if ($index->getFields()) {
         $prefix = $index->machine_name . ':';
         $prefix_name = $index->name . ' » ';
         $f = $index->getFields();
