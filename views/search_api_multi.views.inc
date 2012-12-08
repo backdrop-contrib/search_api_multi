@@ -87,8 +87,14 @@ function search_api_multi_views_data() {
       $table['search_api_multi_index']['title'] = t('Index');
       $table['search_api_multi_index']['help'] = t('The search indexes that will be searched.');
       $table['search_api_multi_index']['type'] = 'options';
-      $table['search_api_multi_index']['field']['handler'] = 'entity_views_handler_field_options';
-      $table['search_api_multi_index']['field']['options'] = $index_options;
+      $table['search_api_multi_index']['field']['handler'] = 'entity_views_handler_field_entity';
+      $table['search_api_multi_index']['field']['type'] = 'search_api_index';
+      $table['search_api_multi_index']['relationship']['handler'] = 'entity_views_handler_relationship';
+      $table['search_api_multi_index']['relationship']['base'] = 'entity_search_api_index';
+      $table['search_api_multi_index']['relationship']['base field'] = 'machine_name';
+      $table['search_api_multi_index']['relationship']['relationship field'] = 'search_api_multi_index';
+      $table['search_api_multi_index']['relationship']['label'] = t('Search index');
+      $table['search_api_multi_index']['relationship']['multiple'] = FALSE;
       $table['search_api_multi_index']['argument']['handler'] = 'SearchApiViewsHandlerArgument';
       $table['search_api_multi_index']['filter']['handler'] = 'SearchApiViewsHandlerFilterOptions';
       $table['search_api_multi_index']['filter']['options'] = $index_options;
