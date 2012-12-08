@@ -17,6 +17,7 @@ function search_api_multi_views_data() {
       $key = 'search_api_multi_' . $server_id;
       $table = &$data[$key];
       $table['table']['group'] = t('Search');
+      $table['table']['entity type'] = NULL;
       $table['table']['base'] = array(
         'field' => 'search_api_multi_index',
         'server' => $server_id,
