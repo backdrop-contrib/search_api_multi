@@ -1,4 +1,3 @@
-
 Multi-index searches
 --------------------
 
