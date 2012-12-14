@@ -5,7 +5,7 @@
  * same server. The server has to support the "search_api_multi" feature.
  *
  * For discerning from which index a certain field should be used (for filtering
- * or specifying the fulltext fields, fr instance), all field identifiers have
+ * or specifying the fulltext fields, for instance), all field identifiers have
  * to be prefixed with their index' machine name, seperated by a colon.
  * For example, to filter on the "author:name" field from the index with the
  * machine name "default_node_index", use "default_node_index:author:name" as
