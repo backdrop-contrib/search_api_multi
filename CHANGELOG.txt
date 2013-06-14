@@ -1,0 +1,6 @@
+Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
+------------------------------------------------------
+
+Search API Multi-Index Searches 1.0 (03/20/2013):
+-------------------------------------------------
+First stable release of the Search API Multi-Index Searches project.
