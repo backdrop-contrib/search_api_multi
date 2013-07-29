@@ -29,7 +29,7 @@ class SearchApiMultiViewsQuery extends SearchApiViewsQuery {
         $id = substr($base_table, 17);
         $this->server = search_api_server_load($id);
         $this->query = $this->server->queryMultiple(array(
-          'parse mode' => 'terms',
+          'parse mode' => $this->options['parse_mode'],
         ));
       }
       else {

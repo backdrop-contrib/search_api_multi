@@ -1,5 +1,6 @@
 Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
 ------------------------------------------------------
+- #2045127 by lex0r, drunken monkey: Fixed parse mode in views.
 
 Search API Multi-Index Searches 1.0 (03/20/2013):
 -------------------------------------------------
