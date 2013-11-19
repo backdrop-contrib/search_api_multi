@@ -738,14 +738,16 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
 
       $response = $query->execute();
 
-      // Adapt the results array to the multi-index format.
-      $results = array();
-      foreach ($response['results'] as $key => $result) {
-        $key = "$index_id:$key";
-        $results[$key] = $result;
-        $results[$key]['index_id'] = $index_id;
+      if (!empty($response['results'])) {
+        // Adapt the results array to the multi-index format.
+        $results = array();
+        foreach ($response['results'] as $key => $result) {
+          $key = "$index_id:$key";
+          $results[$key] = $result;
+          $results[$key]['index_id'] = $index_id;
+        }
+        $response['results'] = $results;
       }
-      $response['results'] = $results;
 
       if (!isset($return)) {
         $return = array(
@@ -764,9 +766,11 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
       }
 
       // Merge performance.
-      foreach ($response['performance'] as $measure => $time) {
-        $return['performance'] += array($measure => 0);
-        $return['performance'][$measure] += $time;
+      if (!empty($response['performance'])) {
+        foreach ($response['performance'] as $measure => $time) {
+          $return['performance'] += array($measure => 0);
+          $return['performance'][$measure] += $time;
+        }
       }
 
       // Merge any additional keys. We can only guess what to do here, but we
