@@ -141,11 +141,23 @@ function search_api_multi_views_data() {
  */
 function search_api_multi_views_plugins() {
   return array(
+    'module' => 'search_api_multi',
     'query' => array(
       'search_api_multi_query' => array(
         'title' => t('Search API Query'),
         'help' => t('Query will be generated and run using the Search API.'),
         'handler' => 'SearchApiMultiViewsQuery'
+      ),
+    ),
+    'row' => array(
+      'search_api_multi' => array(
+        'title' => t('Rendered entity'),
+        'help' => t('Renders a single entity in a specific view mode (e.g. teaser).'),
+        'base' => array('search_api_multi'),
+        'handler' => 'SearchApiMultiRowEntityView',
+        'uses fields' => FALSE,
+        'uses options' => TRUE,
+        'type' => 'normal',
       ),
     ),
   );
