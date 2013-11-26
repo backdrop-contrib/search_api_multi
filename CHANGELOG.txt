@@ -1,5 +1,6 @@
 Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
 ------------------------------------------------------
+- #2138225 by Ronino: Fixed definition of Relevance Views field handler.
 - #1845014 by minorOffense, DeFr, drunken monkey: Added support for view
   (build) modes in Views.
 - #2134939 by drunken monkey: Fixed Views options filter handler.
