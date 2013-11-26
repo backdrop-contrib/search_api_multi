@@ -1,5 +1,6 @@
 Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
 ------------------------------------------------------
+- #2134939 by drunken monkey: Fixed Views options filter handler.
 - #2032451 by drunken monkey: Added possibility to search indexes on any server.
 - #2045127 by lex0r, drunken monkey: Fixed parse mode in views.
 

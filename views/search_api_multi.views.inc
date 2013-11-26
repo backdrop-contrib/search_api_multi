@@ -73,6 +73,12 @@ function search_api_multi_views_data() {
         $table[$id]['type'] = $field['type'];
         $table[$id]['real field'] = $key;
         _search_api_views_add_handlers($key, $field, $tmp, $table);
+        // The newest (Search API 1.10+) SearchApiViewsHandlerFilterOptions
+        // class is incompatible with multi-index searches. Substitute our own
+        // handler.
+        if (isset($table[$id]['filter']['handler']) && $table[$id]['filter']['handler'] == 'SearchApiViewsHandlerFilterOptions' && method_exists('SearchApiViewsHandlerFilterOptions', 'get_wrapper')) {
+          $table[$id]['filter']['handler'] = 'SearchApiMultiViewsHandlerFilterOptions';
+        }
       }
     }
 
@@ -95,8 +101,14 @@ function search_api_multi_views_data() {
     $table['search_api_multi_index']['relationship']['label'] = t('Search index');
     $table['search_api_multi_index']['relationship']['multiple'] = FALSE;
     $table['search_api_multi_index']['argument']['handler'] = 'SearchApiViewsHandlerArgument';
-    $table['search_api_multi_index']['filter']['handler'] = 'SearchApiViewsHandlerFilterOptions';
-    $table['search_api_multi_index']['filter']['options'] = $index_options;
+    // See above.
+    if (method_exists('SearchApiViewsHandlerFilterOptions', 'get_wrapper')) {
+      $table['search_api_multi_index']['filter']['handler'] = 'SearchApiMultiViewsHandlerFilterOptions';
+    }
+    else {
+      $table['search_api_multi_index']['filter']['handler'] = 'SearchApiViewsHandlerFilterOptions';
+      $table['search_api_multi_index']['filter']['options'] = $index_options;
+    }
 
     $table['search_api_relevance']['group'] = t('Search');
     $table['search_api_relevance']['title'] = t('Relevance');

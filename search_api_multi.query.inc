@@ -661,7 +661,6 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     $pre_search = microtime(TRUE);
 
     // Execute query.
-    $this->servers = array_filter($this->servers);
     if (count($this->servers) == 1) {
       $server = search_api_server_load(key($this->servers));
       if ($server && $server->supportsFeature('search_api_multi')) {
@@ -1001,6 +1000,16 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
       elseif ($this->keys) {
         $this->indexes = array_intersect_key($this->indexes, $this->index_fields);
       }
+
+      // Filter the $servers property according to the used indexes.
+      foreach ($this->servers as $server_id => $indexes) {
+        foreach ($indexes as $index_id => $index) {
+          if (!isset($this->indexes[$index_id])) {
+            unset($this->servers[$server_id][$index_id]);
+          }
+        }
+      }
+      $this->servers = array_filter($this->servers);
     }
   }
 
