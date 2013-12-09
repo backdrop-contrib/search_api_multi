@@ -1,3 +1,6 @@
+Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
+------------------------------------------------------
+
 Search API Multi-Index Searches 1.1 (12/09/2013):
 -------------------------------------------------
 - #2138225 by Ronino: Fixed definition of Relevance Views field handler.
