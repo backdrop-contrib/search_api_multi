@@ -741,7 +741,12 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     // Prepare a normal Search API query for all contained indexes.
     $queries = array();
     foreach ($this->getIndexes() as $index_id => $index) {
-      $queries[$index_id] = search_api_query($index_id, $options);
+      try {
+        $queries[$index_id] = search_api_query($index_id, $options);
+      }
+      catch (SearchApiException $e) {
+        watchdog_exception('search_api_multi', $e);
+      }
     }
 
     // Set the filters appropriately.

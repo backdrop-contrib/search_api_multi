@@ -1,5 +1,6 @@
 Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
 ------------------------------------------------------
+- #2147563 by drunken monkey: Improved error handling.
 - #2113925 by drunken monkey: Fixed the "Search: Index" filter.
 
 Search API Multi-Index Searches 1.1 (12/09/2013):
