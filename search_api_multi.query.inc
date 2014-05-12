@@ -593,7 +593,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
             }
           }
         }
-        elseif (strpos($f[0], ':') !== FALSE) {
+        elseif ($f[2] != '<>' && strpos($f[1], ':')) {
           list($index_id) = explode(':', $f[0], 2);
           $indexes[$index_id] = TRUE;
         }
@@ -624,8 +624,10 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     }
     else {
       $this->filter->condition($field, $value, $operator);
-      list($index_id) = explode(':', $field, 2);
-      $this->used_indexes[$index_id] = TRUE;
+      if ($operator != '<>' && strpos($field, ':')) {
+        list($index_id) = explode(':', $field, 2);
+        $this->used_indexes[$index_id] = TRUE;
+      }
     }
     return $this;
   }
