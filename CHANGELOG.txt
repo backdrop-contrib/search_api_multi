@@ -1,3 +1,6 @@
+Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
+------------------------------------------------------
+
 Search API Multi-Index Searches 1.2 (05/24/2014):
 -------------------------------------------------
 - #2148023 by drunken monkey: Fixed filtering for specific entity type bundles.
