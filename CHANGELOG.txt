@@ -1,5 +1,7 @@
 Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
 ------------------------------------------------------
+- #2278931 by Shuairan, tomdearden, drunken monkey: Fixed detection of used
+  indexes in a query.
 
 Search API Multi-Index Searches 1.2 (05/24/2014):
 -------------------------------------------------

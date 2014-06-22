@@ -593,7 +593,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
             }
           }
         }
-        elseif ($f[2] != '<>' && strpos($f[1], ':')) {
+        elseif ($f[2] != '<>' && strpos($f[0], ':')) {
           list($index_id) = explode(':', $f[0], 2);
           $indexes[$index_id] = TRUE;
         }
@@ -835,13 +835,13 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
   /**
    * Helper method for adding a filter to index-specific queries.
    *
-   * @param array $filters
+   * @param SearchApiQueryFilterInterface[]|array[] $filters
    *   An array of filters to add, as returned by
    *   SearchApiQueryFilterInterface::getFilters().
-   * @param array $parents
+   * @param SearchApiQuery[] $parents
    *   The query or filter objects to which the filters should be applied, keyed
    *   by index ID.
-   * @param array $queries
+   * @param SearchApiQuery[] $queries
    *   The queries used, keyed by index ID.
    */
   protected function addFilters(array $filters, array $parents, array $queries) {
@@ -851,9 +851,12 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
           continue;
         }
         list($index_id, $field) = explode(':', $filter[0], 2);
-        $parents[$index_id]->condition($field, $filter[1], $filter[2]);
+        if (!empty($parents[$index_id])) {
+          $parents[$index_id]->condition($field, $filter[1], $filter[2]);
+        }
       }
       else {
+        /** @var SearchApiQueryFilterInterface[] $nested */
         $nested = array();
         foreach ($parents as $index_id => $query) {
           $nested[$index_id] = $queries[$index_id]->createFilter($filter->getConjunction());
