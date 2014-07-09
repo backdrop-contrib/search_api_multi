@@ -210,7 +210,7 @@ interface SearchApiMultiQueryInterface {
   /**
    * Retrieves the searched indexes.
    *
-   * @return array
+   * @return SearchApiIndex[]
    *   An array of SearchApiIndex objects representing all indexes that will be
    *   used for this search, keyed by machine names.
    */
