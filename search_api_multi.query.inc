@@ -741,6 +741,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
       $options['offset'] = 0;
     }
     // Prepare a normal Search API query for all contained indexes.
+    /** @var SearchApiQuery[] $queries */
     $queries = array();
     foreach ($this->getIndexes() as $index_id => $index) {
       try {
@@ -758,6 +759,15 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     foreach ($queries as $index_id => $query) {
       $query->keys($this->orig_keys);
       $query->fields($this->index_fields[$index_id]);
+      foreach ($this->sort as $field => $order) {
+        if (strpos($field, ':') !== FALSE) {
+          list($field_index_id, $field) = explode(':', $field, 2);
+          if ($field_index_id != $index_id) {
+            continue;
+          }
+        }
+        $query->sort($field, $order);
+      }
 
       $response = $query->execute();
 

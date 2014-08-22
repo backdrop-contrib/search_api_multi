@@ -1,5 +1,7 @@
 Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
 ------------------------------------------------------
+- #2304669 by drclaw, drunken monkey: Fixed sorting in searchMultiple()
+  fallback method.
 - #2267801 by Deciphered, drunken monkey, vanessakovalsky: Fixed the Views
   "Additional access checks" option.
 - #2278931 by Shuairan, tomdearden, drunken monkey: Fixed detection of used
