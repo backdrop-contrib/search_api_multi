@@ -34,7 +34,7 @@ class SearchApiMultiViewsQuery extends SearchApiViewsQuery {
       $row = array();
 
       if (!empty($this->options['entity_access']) && isset($indexes[$result['index_id']]) && $indexes[$result['index_id']]->getEntityType()) {
-        $entity = $indexes[$result['index_id']]->loadItems(array());
+        $entity = $indexes[$result['index_id']]->loadItems(array($result['id']));
         if (!$entity || !entity_access('view', $indexes[$result['index_id']]->item_type, reset($entity))) {
           continue;
         }
