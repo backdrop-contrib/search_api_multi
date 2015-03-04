@@ -48,6 +48,14 @@ class SearchApiMultiViewsQuery extends SearchApiViewsQuery {
         $row['entity'] = $result['id'];
       }
 
+      // Gather any fields from the search results.
+      if (!empty($result['fields'])) {
+        foreach ($result['fields'] as $field_id => $value) {
+          $field_id = $result['index_id'] . ':' . $field_id;
+          $row['_entity_properties'][$field_id] = $value;
+        }
+      }
+
       $row['_entity_properties']['search_api_multi_id'] = $result['id'];
       $row['_entity_properties']['search_api_multi_index'] = $result['index_id'];
       $row['_entity_properties']['search_api_relevance'] = $result['score'];
