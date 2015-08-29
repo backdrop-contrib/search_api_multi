@@ -1,5 +1,7 @@
 Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
 ------------------------------------------------------
+- #2503443 by yechuah, drunken monkey: Fixed the default value for the view
+  modes in the Views row plugin.
 - #2412545 by paolomainardi, drunken monkey: Added support for returning field
   values in the search results.
 - #2304669 by drclaw, drunken monkey: Fixed sorting in searchMultiple()
