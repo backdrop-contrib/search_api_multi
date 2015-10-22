@@ -88,7 +88,7 @@ class SearchApiMultiViewsQuery extends SearchApiViewsQuery {
         'description' => t('Results from the @index index.', array('@index' => $index->name)),
       );
       if (!$entity_type) {
-        $info['property info'][$index_id] += $index->datasource()->getMetadataWrapper()->info();
+        $info['property info'][$index_id] += $index->entityWrapper()->info();
       }
     }
 

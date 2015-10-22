@@ -37,7 +37,7 @@ function search_api_multi_views_data() {
           'description' => t('Results from the @index index.', array('@index' => $index->name)),
         );
         if (empty($entity_types[$index->item_type])) {
-          $info += $index->datasource()->getMetadataWrapper()->info();
+          $info += $index->entityWrapper()->info();
         }
         entity_views_field_definition($index_id, $info, $table);
 
