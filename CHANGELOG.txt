@@ -1,4 +1,4 @@
-Search API Multi-Index Searches 1.x, dev (xx/xx/xxxx):
+Search API Multi-Index Searches 1.x, dev (xxxx-xx-xx):
 ------------------------------------------------------
 - #2580975 by drunken monkey: Fixed incompatibility with "Multiple types"
   indexes.
