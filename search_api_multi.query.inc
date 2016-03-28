@@ -62,11 +62,15 @@ interface SearchApiMultiQueryInterface {
    *
    * @param string $conjunction
    *   The conjunction to use for the filter - either 'AND' or 'OR'.
+   * @param string[] $tags
+   *   (Optional) An arbitrary set of tags. Can be used to identify this filter
+   *   down the line if necessary. This is primarily used by the facet system
+   *   to support OR facet queries.
    *
    * @return SearchApiQueryFilterInterface
    *   A filter object that is set to use the specified conjunction.
    */
-  public function createFilter($conjunction = 'AND');
+  public function createFilter($conjunction = 'AND', array $tags = array());
 
   /**
    * Sets the keys to search for.
@@ -518,9 +522,9 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
   /**
    * {@inheritdoc}
    */
-  public function createFilter($conjunction = 'AND') {
+  public function createFilter($conjunction = 'AND', array $tags = array()) {
     $filter_class = $this->options['filter class'];
-    return new $filter_class($conjunction);
+    return new $filter_class($conjunction, $tags);
   }
 
   /**
