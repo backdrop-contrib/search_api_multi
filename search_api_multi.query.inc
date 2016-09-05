@@ -985,7 +985,12 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
         $comp = $a['score'] - $b['score'];
       }
       elseif ($key == 'search_api_id') {
-        $comp = $a['id'] - $b['id'];
+        if (is_numeric($a['id']) && is_numeric($b['id'])) {
+          $comp = $a['id'] - $b['id'];
+        }
+        else {
+          $comp = strnatcasecmp($a['id'], $b['id']);
+        }
       }
       else {
         list($index_id, $field) = explode(':', $key, 2);
