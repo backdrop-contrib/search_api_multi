@@ -1,5 +1,7 @@
 Search API Multi-Index Searches 1.x, dev (xxxx-xx-xx):
 ------------------------------------------------------
+- #2822614 by drunken monkey: Fixed PHP notice in
+  SearchApiMultiRowEntityView::get_wrapper().
 - #2788683 by drunken monkey: Fixed sorting by Entity ID.
 - #2690523 by alan-ps, drunken monkey: Added support for query tags.
 - #2639000 by drunken monkey: Fixed fatal error when items could not be loaded.
