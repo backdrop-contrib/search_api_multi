@@ -1,3 +1,6 @@
+Search API Multi-Index Searches 1.x, dev (xxxx-xx-xx):
+------------------------------------------------------
+
 Search API Multi-Index Searches 1.5 (2018-09-17):
 -------------------------------------------------
 - #2780799 by drunken monkey, dalemoore: Fixed processing of highlighted fields
