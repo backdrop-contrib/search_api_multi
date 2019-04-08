@@ -1,5 +1,7 @@
 Search API Multi-Index Searches 1.x, dev (xxxx-xx-xx):
 ------------------------------------------------------
+- #2642402 by drunken monkey, berliner: Fixed error when no fulltext fields are
+  specified for an index.
 
 Search API Multi-Index Searches 1.5 (2018-09-17):
 -------------------------------------------------
