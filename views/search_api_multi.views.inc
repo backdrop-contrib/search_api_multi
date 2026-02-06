@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Hook implementations for the Views integration of the module.
@@ -7,8 +6,9 @@
 
 /**
  * Implements hook_views_data().
+ *
+ * This is largely copied from search_api_views_views_data().
  */
-// This is largely copied from search_api_views_views_data().
 function search_api_multi_views_data() {
   $data = array();
   try {
@@ -39,7 +39,7 @@ function search_api_multi_views_data() {
         if (empty($entity_types[$index->item_type])) {
           $info += $index->entityWrapper()->info();
         }
-        entity_views_field_definition($index_id, $info, $table);
+        entity_plus_views_field_definition($index_id, $info, $table);
 
         // Add handlers for all indexed fields.
         foreach ($index->getFields() as $key => $field) {
@@ -64,7 +64,7 @@ function search_api_multi_views_data() {
             }
           }
           $key = "$index_id:$key";
-          $id = _entity_views_field_identifier($key, $table);
+          $id = _entity_plus_views_field_identifier($key, $table);
           if ($group) {
             $table[$id]['group'] = $group;
             $name = t('!field (indexed)', array('!field' => $name));
@@ -87,11 +87,11 @@ function search_api_multi_views_data() {
       }
     }
 
-    // Special handlers
+    // Special handlers.
     $table['search_api_multi_id']['title'] = t('Entity ID');
     $table['search_api_multi_id']['help'] = t("The entity's ID.");
     $table['search_api_multi_id']['field']['type'] = 'text';
-    $table['search_api_multi_id']['field']['handler'] = 'entity_views_handler_field_text';
+    $table['search_api_multi_id']['field']['handler'] = 'entity_plus_views_handler_field_text';
     $table['search_api_multi_id']['sort']['handler'] = 'SearchApiViewsHandlerSort';
     $table['search_api_multi_id']['sort']['real field'] = 'search_api_id';
 
@@ -127,7 +127,7 @@ function search_api_multi_views_data() {
     $table['search_api_excerpt']['title'] = t('Excerpt');
     $table['search_api_excerpt']['help'] = t('Excerpts from the search results highlighting occurrences of the keywords.');
     $table['search_api_excerpt']['field']['type'] = 'text';
-    $table['search_api_excerpt']['field']['handler'] = 'entity_views_handler_field_text';
+    $table['search_api_excerpt']['field']['handler'] = 'entity_plus_views_handler_field_text';
 
     $table['search_api_multi_fulltext']['group'] = t('Search');
     $table['search_api_multi_fulltext']['title'] = t('Fulltext search');
@@ -152,17 +152,18 @@ function search_api_multi_views_plugins() {
       'search_api_multi_query' => array(
         'title' => t('Search API Query'),
         'help' => t('Query will be generated and run using the Search API.'),
-        'handler' => 'SearchApiMultiViewsQuery'
+        'handler' => 'SearchApiMultiViewsQuery',
       ),
     ),
     'row' => array(
       'search_api_multi' => array(
         'title' => t('Rendered entity'),
+        'handler' => 'SearchApiMultiRowEntityView',
+        'path' => backdrop_get_path('module', 'search_api_multi') . '/views',
+        'uses options' => TRUE,
         'help' => t('Renders a single entity in a specific view mode (e.g. teaser).'),
         'base' => array('search_api_multi'),
-        'handler' => 'SearchApiMultiRowEntityView',
         'uses fields' => FALSE,
-        'uses options' => TRUE,
         'type' => 'normal',
       ),
     ),

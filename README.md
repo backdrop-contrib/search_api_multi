@@ -1,12 +1,9 @@
-Multi-index searches
---------------------
+# Search API: Multi-index searches
 
 This module allows you to create search queries on multiple indexes that lie on
 the same server. The only thing you'll need is a search service class that
 supports the "search_api_multi" feature. Currently, only the "Solr search"
 supports this.
-
-
 
 Information for users
 ---------------------

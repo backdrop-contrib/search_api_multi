@@ -1,5 +1,4 @@
 <?php
-
 /**
  * @file
  * Hooks provided by the Search API multi-index searches module.

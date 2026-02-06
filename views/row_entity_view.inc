@@ -82,7 +82,7 @@ class SearchApiMultiRowEntityView extends views_plugin_row {
     }
 
     $form['view_mode'] = array(
-      '#tree' => TRUE
+      '#tree' => TRUE,
     );
 
     foreach ($options as $entity_type => $modes) {
@@ -98,7 +98,7 @@ class SearchApiMultiRowEntityView extends views_plugin_row {
             'This view mode will be used to render entities from the following index: %indexes',
             'This view mode will be used to render entities from the following indexes: %indexes',
             array(
-             '%indexes' => implode(', ', $this->indexes['entity_types'][$entity_type]),
+              '%indexes' => implode(', ', $this->indexes['entity_types'][$entity_type]),
             )
           ),
         );
@@ -111,7 +111,7 @@ class SearchApiMultiRowEntityView extends views_plugin_row {
         // choice to make, so just expose it to let the user know about it.
         $form['view_mode']["{$entity_type}__description"] = array(
           '#type' => 'item',
-          '#title'=> t('View mode for @entity_name entities', array(
+          '#title' => t('View mode for @entity_name entities', array(
             '@entity_name' => $entity_info[$entity_type]['label'],
           )),
           '#description' => reset($modes),
@@ -128,7 +128,7 @@ class SearchApiMultiRowEntityView extends views_plugin_row {
         '#type' => 'item',
         '#title' => 'Incompatible indexes',
         '#description' => t("The following indexes are not based on entities, and can't be used with this row style: %indexes. Items from those indexes will be skipped during rendering.", array(
-          '%indexes' => implode(', ',$this->indexes['incompatibles']),
+          '%indexes' => implode(', ', $this->indexes['incompatibles']),
         )),
       );
     }
@@ -171,7 +171,7 @@ class SearchApiMultiRowEntityView extends views_plugin_row {
   public function render($values) {
     if ($wrapper = $this->get_wrapper($values)) {
       $render = $wrapper->view($this->options['view_mode'][$wrapper->type()]);
-      return drupal_render($render);
+      return backdrop_render($render);
     }
   }
 }

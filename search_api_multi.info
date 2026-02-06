@@ -1,9 +1,11 @@
-
+type = module
 name = Multi-index searches
 description = Small extension for the Search API that allows searches across several indexes on the same server.
-dependencies[] = search_api
-core = 7.x
+backdrop = 1.x
 package = Search
+
+dependencies[] = entity_plus
+dependencies[] = search_api
 
 files[] = search_api_multi.query.inc
 files[] = search_api_multi.service.inc

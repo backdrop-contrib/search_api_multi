@@ -67,7 +67,8 @@ class SearchApiMultiViewsQuery extends SearchApiViewsQuery {
   }
 
   /**
-   * Helper function for adding results to a view in the format expected by the view.
+   * Helper function for adding results to a view in the format expected by the
+   * view.
    */
   protected function addResults(array $results, $view) {
     $indexes = $this->getIndexes();
@@ -182,16 +183,16 @@ class SearchApiMultiViewsQuery extends SearchApiViewsQuery {
       $selector_suffix = substr($field, 0, $pos);
     }
     if ($selector_suffix || ($relationship && !empty($this->view->relationship[$relationship]))) {
-      // Use EntityFieldHandlerHelper to compute the correct data selector for
-      // the relationship.
+      // Use EntityPlusFieldHandlerHelper to compute the correct data selector
+      // for the relationship.
       $handler = (object) array(
         'view' => $this->view,
         'relationship' => $relationship,
         'real_field' => '',
       );
-      $selector = EntityFieldHandlerHelper::construct_property_selector($handler);
+      $selector = EntityPlusFieldHandlerHelper::construct_property_selector($handler);
       $selector .= ($selector ? ':' : '') . $selector_suffix;
-      list($type, $wrappers) = EntityFieldHandlerHelper::extract_property_multiple($wrappers, $selector);
+      list($type, $wrappers) = EntityPlusFieldHandlerHelper::extract_property_multiple($wrappers, $selector);
     }
 
     return array($type, $wrappers);

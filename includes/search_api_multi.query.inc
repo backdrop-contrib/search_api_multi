@@ -1,4 +1,8 @@
 <?php
+/**
+ * @file
+ * Contains SearchApiMultiQueryInterface and SearchApiMultiQuery.
+ */
 
 /**
  * Interface representing a search query on multiple Search API indexes.
@@ -25,8 +29,8 @@ interface SearchApiMultiQueryInterface {
    *     'AND' or 'OR'. 'AND' by default. This only influences the search keys,
    *     filters will always use AND by default.
    *   - 'parse mode': The mode with which to parse the $keys variable, if it
-   *     is set and not already an array. See SearchApiMultiQuery::parseModes() for
-   *     recognized parse modes.
+   *     is set and not already an array. See SearchApiMultiQuery::parseModes()
+   *     for recognized parse modes.
    *   - languages: The languages to search for, as an array of language IDs.
    *     If not specified, all languages will be searched. Language-neutral
    *     content (LANGUAGE_NONE) is always searched.
@@ -438,8 +442,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
   public function parseModes() {
     $modes['direct'] = array(
       'name' => t('Direct query'),
-      'description' => t("Don't parse the query, just hand it to the search server unaltered. " .
-          "Might fail if the query contains syntax errors in regard to the specific server's query syntax."),
+      'description' => t("Don't parse the query, just hand it to the search server unaltered. Might fail if the query contains syntax errors in regard to the specific server's query syntax."),
     );
     $modes['single'] = array(
       'name' => t('Single term'),
@@ -447,8 +450,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     );
     $modes['terms'] = array(
       'name' => t('Multiple terms'),
-      'description' => t('The query is interpreted as multiple keywords seperated by spaces. ' .
-          'Keywords containing spaces may be "quoted". Quoted keywords must still be seperated by spaces.'),
+      'description' => t('The query is interpreted as multiple keywords seperated by spaces. Keywords containing spaces may be "quoted". Quoted keywords must still be seperated by spaces.'),
     );
     return $modes;
   }
@@ -486,7 +488,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
             continue;
           }
           if ($quoted) {
-            if ($v[drupal_strlen($v)-1] == '"') {
+            if ($v[backdrop_strlen($v) - 1] == '"') {
               $v = substr($v, 0, -1);
               $str .= ' ' . $v;
               $ret[$k] = $str;
@@ -498,8 +500,8 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
             }
           }
           elseif ($v[0] == '"') {
-            $len = drupal_strlen($v);
-            if ($len > 1 && $v[$len-1] == '"') {
+            $len = backdrop_strlen($v);
+            if ($len > 1 && $v[$len - 1] == '"') {
               $ret[$k] = substr($v, 1, -1);
             }
             else {
@@ -655,7 +657,10 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
       }
       $type = $fields[$f]['type'];
       if (search_api_is_list_type($type) || search_api_is_text_type($type)) {
-        throw new SearchApiException(t('Trying to sort on field @field of illegal type @type.', array('@field' => $f, '@type' => $type)));
+        throw new SearchApiException(t('Trying to sort on field @field of illegal type @type.', array(
+          '@field' => $f,
+          '@type' => $type,
+        )));
       }
       $this->used_indexes[$index_id] = TRUE;
     }
@@ -685,7 +690,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
     $this->preExecute();
 
     // Let modules alter the query.
-    drupal_alter('search_api_multi_query', $this);
+    backdrop_alter('search_api_multi_query', $this);
 
     $pre_search = microtime(TRUE);
 
@@ -983,7 +988,7 @@ class SearchApiMultiQuery implements SearchApiMultiQueryInterface {
    *   A negative number if $a should come before $b, 0 if both compare equal
    *   and a positive number otherwise.
    */
-  protected function compareResults(array &$a, array &$b) {
+  protected function compareResults(array $a, array $b) {
     foreach ($this->sort as $key => $order) {
       // Get the sorting for this specific field.
       if ($key == 'search_api_relevance') {

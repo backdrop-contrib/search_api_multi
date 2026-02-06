@@ -6,6 +6,9 @@
 class SearchApiMultiHandlerFilterFulltext extends SearchApiViewsHandlerFilterFulltext {
 
 
+  /**
+ *
+ */
   public function options_form(&$form, &$form_state) {
     parent::options_form($form, $form_state);
     $form['fields']['#description'] = t('Select the fields that will be searched. If no fields are selected and the "Search keys" mode is used, all available fulltext fields will be searched.');
